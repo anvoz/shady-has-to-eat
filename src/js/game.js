@@ -15,6 +15,7 @@
 
             game.load.image('background', 'assets/background.png');
 
+            game.load.image('ground', 'assets/ground.png');
             game.load.image('ledge', 'assets/ledge.png');
 
             game.load.spritesheet('player', 'assets/player.png', 30, 30);
@@ -62,6 +63,10 @@
                 ledge.body.allowGravity = false;
                 ledge.body.immovable = true;
             }
+            var ground = platforms.create(0, 479, 'ground');
+            game.physics.arcade.enableBody(ground);
+            ground.body.allowGravity = false;
+            ground.body.immovable = true;
         },
         createPlayer: function() {
             var game = this,
@@ -116,7 +121,7 @@
                 // Allow the player to jump if they are touching the ground.
                 if (cursors.up.isDown && player.body.touching.down)
                 {
-                    player.body.velocity.y = -350;
+                    player.body.velocity.y = -250;
                 }
             };
         }
