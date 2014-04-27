@@ -47,6 +47,10 @@
                     player.body.velocity.x = 0;
                     player.animations.stop();
 
+                    game.add.text(250, 150, 'Game over', {
+                        font: 'bold 18pt Arial'
+                    });
+
                     loop.timer.destroy();
                 }
 
