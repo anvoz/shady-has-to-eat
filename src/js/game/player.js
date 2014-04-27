@@ -2,7 +2,7 @@
     'use strict';
 
     var Player = {
-        hp: 5,
+        hp: 100,
         maxHP: 100,
         spd: 150,
         isDead: false,
@@ -27,12 +27,16 @@
             });
 
             var loop = game.time.events.loop(Phaser.Timer.SECOND, function() {
+                var player = game.player;
+
                 Player.hp--;
+
+                if ( ! Player.inShadow(game, player)) {
+                    Player.hp -= 5;
+                }
                 game.playerHPText.setText('HP: ' + Player.hp + ' / ' + Player.maxHP);
 
-                if (Player.hp === 0) {
-                    var player = game.player;
-
+                if (Player.hp <= 0) {
                     player.isDead = true;
                     player.frame = 6;
                     player.body.velocity.x = 0;
@@ -87,6 +91,19 @@
             {
                 player.body.velocity.y = -250;
             }
+        },
+        inShadow: function(game, player) {
+            if (player.y > 360) {
+                return true;
+            }
+            var clouds = game.clouds.children,
+                x = player.x;
+            for (var i = 0; i < clouds.length; i++) {
+                if (x > clouds[i].x && x < clouds[i].x + 150) {
+                    return true;
+                }
+            }
+            return false;
         }
     };
 
