@@ -6,6 +6,7 @@
 
         game.clouds = false;
         game.platforms = false;
+        game.humans = false;
 
         game.player = false;
         game.playerHPText = '';
@@ -23,6 +24,7 @@
             game.load.image('ledge', 'assets/ledge.png');
 
             game.load.spritesheet('player', 'assets/player.png', 30, 30);
+            game.load.image('human', 'assets/human.png');
         },
 
         create: function() {
@@ -36,16 +38,24 @@
             game.add.sprite(0, 0, 'background');
 
             game.createPlatforms();
-            game.player = Game.Player.create(game, 30, 400);
             Game.Cloud.create(game, 60, 3);
+            Game.Human.create(game, 330, 20);
+            game.player = Game.Player.create(game, 30, 400);
         },
 
         update: function() {
             var game = this,
                 platforms = game.platforms,
+                humans = game.humans,
                 player = game.player;
 
             game.physics.arcade.collide(player, platforms);
+            game.physics.arcade.collide(player, humans, function(player, human) {
+                Game.Player.hp++;
+                human.x = -1000;
+                human.body.velocity.x = 0;
+                human.body.velocity.y = 0;
+            });
 
             Game.Player.update(game, player);
         },

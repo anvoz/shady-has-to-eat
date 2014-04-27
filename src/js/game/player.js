@@ -22,19 +22,24 @@
             player.frame = 3;
 
             var hp = Player.hp;
-            game.playerHPText = game.add.text(10, 10, 'HP: ' + hp + ' / ' + Player.maxHP, {
+            game.playerHPText = game.add.text(10, 10, Player.getHPText(hp), {
                 font: 'bold 14pt Arial'
             });
 
             var loop = game.time.events.loop(Phaser.Timer.SECOND, function() {
-                var player = game.player;
+                var player = game.player,
+                    hp = Player.hp;
 
-                Player.hp--;
+                hp--;
 
                 if ( ! Player.inShadow(game, player)) {
-                    Player.hp -= 5;
+                    hp -= 5;
                 }
-                game.playerHPText.setText('HP: ' + Player.hp + ' / ' + Player.maxHP);
+
+                hp = Math.max(0, hp);
+                hp = Math.min(100, hp);
+
+                game.playerHPText.setText(Player.getHPText(hp));
 
                 if (Player.hp <= 0) {
                     player.isDead = true;
@@ -44,6 +49,8 @@
 
                     loop.timer.destroy();
                 }
+
+                Player.hp = hp;
             });
 
             return player;
@@ -104,6 +111,9 @@
                 }
             }
             return false;
+        },
+        getHPText: function(hp) {
+            return 'HP: ' + hp + ' / ' + Player.maxHP;
         }
     };
 
