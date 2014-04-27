@@ -30,6 +30,7 @@
             var cloud = this;
 
             cloud.x = Cloud.random(0, 200) - 400;
+            cloud.body.velocity.x = Cloud.spd;
         },
         random: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;

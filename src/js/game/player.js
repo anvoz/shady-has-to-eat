@@ -41,7 +41,7 @@
 
                 game.playerHPText.setText(Player.getHPText(hp));
 
-                if (Player.hp <= 0) {
+                if (hp <= 0) {
                     player.isDead = true;
                     player.frame = 6;
                     player.body.velocity.x = 0;

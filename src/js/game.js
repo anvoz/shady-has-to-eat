@@ -18,11 +18,13 @@
             numOfClouds: 3,
             numOfHumans: 5,
 
+            spdCloudPerScore: 5,
+
             scorePerHuman: 1,
 
             hpPerSecond: -1,
-            hpPerSunburn: -20,
-            hpPerHuman: 10
+            hpPerSunburn: -25,
+            hpPerHuman: 5
         };
     }
 
@@ -74,6 +76,9 @@
                 game.scoreText.setText(game.getScoreText(game.score));
 
                 Game.Human.die(game, human);
+
+                // Harder over time
+                Game.Cloud.spd += game.config.spdCloudPerScore;
             });
 
             Game.Player.update(game, player);
