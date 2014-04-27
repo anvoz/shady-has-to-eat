@@ -38,6 +38,7 @@
 
             game.load.image('ground', 'assets/ground.png');
             game.load.image('ledge', 'assets/ledge.png');
+            game.load.image('ledge2', 'assets/ledge2.png');
 
             game.load.spritesheet('player', 'assets/player.png', 30, 30);
             game.load.image('human', 'assets/human.png');
@@ -102,6 +103,12 @@
                 ledge.body.allowGravity = false;
                 ledge.body.immovable = true;
             }
+
+            var ledge2 = platforms.create(310, 410, 'ledge2');
+            game.physics.arcade.enableBody(ledge2);
+            ledge2.body.allowGravity = false;
+            ledge2.body.immovable = true;
+
             var ground = platforms.create(0, 479, 'ground');
             game.physics.arcade.enableBody(ground);
             ground.body.allowGravity = false;
