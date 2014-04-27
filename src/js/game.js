@@ -13,6 +13,17 @@
 
         game.score = 0;
         game.scoreText = false;
+
+        game.config = {
+            numOfClouds: 3,
+            numOfHumans: 5,
+
+            scorePerHuman: 10,
+
+            hpPerSecond: -1,
+            hpPerSunburn: -20,
+            hpPerHuman: 10
+        };
     }
 
     Game.prototype = {
@@ -41,8 +52,8 @@
             game.add.sprite(0, 0, 'background');
 
             game.createPlatforms();
-            Game.Cloud.create(game, 60, 3);
-            Game.Human.create(game, 330, 20);
+            Game.Cloud.create(game, 60, game.config.numOfClouds);
+            Game.Human.create(game, 330, game.config.numOfHumans);
             game.player = Game.Player.create(game, 30, 400);
 
             game.scoreText = game.add.text(200, 10, game.getScoreText(game.score), {
@@ -58,13 +69,13 @@
 
             game.physics.arcade.collide(player, platforms);
             game.physics.arcade.collide(player, humans, function(player, human) {
-                Game.Player.hp++;
+                Game.Player.hp += game.config.hpPerHuman;
                 human.x = -1000;
                 human.y = 330;
                 human.body.velocity.x = 0;
                 human.body.velocity.y = 0;
 
-                game.score++;
+                game.score += game.config.scorePerHuman;
                 game.scoreText.setText(game.getScoreText(game.score));
             });
 

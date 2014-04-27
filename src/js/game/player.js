@@ -30,10 +30,10 @@
                 var player = game.player,
                     hp = Player.hp;
 
-                hp--;
+                hp += game.config.hpPerSecond;
 
                 if ( ! Player.inShadow(game, player)) {
-                    hp -= 5;
+                    hp += game.config.hpPerSunburn;
                 }
 
                 hp = Math.max(0, hp);
