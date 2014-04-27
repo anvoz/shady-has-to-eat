@@ -30,20 +30,6 @@
 
     Game.prototype = {
 
-        preload: function() {
-            var game = this;
-
-            game.load.image('background', 'assets/background.png');
-            game.load.image('cloud', 'assets/cloudws.png');
-
-            game.load.image('ground', 'assets/ground.png');
-            game.load.image('ledge', 'assets/ledge.png');
-            game.load.image('ledge2', 'assets/ledge2.png');
-
-            game.load.spritesheet('player', 'assets/player.png', 30, 30);
-            game.load.image('human', 'assets/human.png');
-        },
-
         create: function() {
             var game = this;
 

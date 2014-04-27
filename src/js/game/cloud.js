@@ -34,7 +34,6 @@
 
             // Not create clouds that are too close to each others
             if (x >= lastRndX - 30 && x <= lastRndX + 30) {
-            console.log(x, lastRndX);
                 x += (x > lastRndX) ? 30 : -30;
             }
             Cloud.lastRndX = x;
