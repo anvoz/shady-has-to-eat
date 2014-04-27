@@ -100,7 +100,7 @@
             }
         },
         inShadow: function(game, player) {
-            if (player.y > 360) {
+            if (player.y > 350) {
                 return true;
             }
             var clouds = game.clouds.children,
