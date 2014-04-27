@@ -6,7 +6,9 @@
 
         game.clouds = false;
         game.platforms = false;
+
         game.player = false;
+        game.playerHPText = '';
     }
 
     Game.prototype = {

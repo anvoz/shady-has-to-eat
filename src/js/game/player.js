@@ -2,7 +2,11 @@
     'use strict';
 
     var Player = {
+        hp: 5,
+        maxHP: 100,
         spd: 150,
+        isDead: false,
+
         create: function(game, x, y) {
             var player = game.add.sprite(x, y, 'player');
 
@@ -17,9 +21,34 @@
             // Player always looks to the right when the game started
             player.frame = 3;
 
+            var hp = Player.hp;
+            game.playerHPText = game.add.text(10, 10, 'HP: ' + hp + ' / ' + Player.maxHP, {
+                font: 'bold 14pt Arial'
+            });
+
+            var loop = game.time.events.loop(Phaser.Timer.SECOND, function() {
+                Player.hp--;
+                game.playerHPText.setText('HP: ' + Player.hp + ' / ' + Player.maxHP);
+
+                if (Player.hp === 0) {
+                    var player = game.player;
+
+                    player.isDead = true;
+                    player.frame = 6;
+                    player.body.velocity.x = 0;
+                    player.animations.stop();
+
+                    loop.timer.destroy();
+                }
+            });
+
             return player;
         },
         update: function(game, player) {
+            if (player.isDead) {
+                return;
+            }
+
             var cursors = game.cursors;
 
             // Reset player velocity (movement)
