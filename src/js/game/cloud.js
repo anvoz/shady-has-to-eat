@@ -3,6 +3,7 @@
 
     var Cloud = {
         spd: 100,
+        lastRndX: 0,
         create: function(game, y, count) {
             var clouds;
 
@@ -27,9 +28,18 @@
             }
         },
         reset: function() {
-            var cloud = this;
+            var cloud = this,
+                lastRndX = Cloud.lastRndX,
+                x = Cloud.random(0, 200) - 400;
 
-            cloud.x = Cloud.random(0, 200) - 400;
+            // Not create clouds that are too close to each others
+            if (x >= lastRndX - 30 && x <= lastRndX + 30) {
+            console.log(x, lastRndX);
+                x += (x > lastRndX) ? 30 : -30;
+            }
+            Cloud.lastRndX = x;
+
+            cloud.x = x;
             cloud.body.velocity.x = Cloud.spd;
         },
         random: function(min, max) {
