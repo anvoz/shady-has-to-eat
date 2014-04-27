@@ -2,7 +2,6 @@
     'use strict';
 
     var Human = {
-        seconds: 0,
         create: function(game, y, count) {
             var humans;
 
@@ -23,20 +22,20 @@
             }
 
             game.time.events.loop(Phaser.Timer.SECOND, function() {
-                Human.seconds++;
-                if (Human.seconds % 5 !== 0) {
-                    return;
-                }
-
                 var humans = game.humans.children;
                 for (var i = 0; i < humans.length; i++) {
                     if (humans[i].x < 0) {
-                        humans[i].x = Human.random(0, 625);
+                        humans[i].seconds++;
+                        if (humans[i].seconds % 5 === 0) {
+                            humans[i].x = Human.random(0, 625);
+                        }
                     }
                 }
             });
         },
         die: function(game, human) {
+            human.seconds = 0;
+
             human.x = -1000;
             human.y = 330;
             human.body.velocity.x = 0;
