@@ -54,9 +54,9 @@
             game.add.sprite(0, 0, 'background');
 
             game.createPlatforms();
-            Game.Cloud.create(game, 60, game.config.numOfClouds);
             Game.Human.create(game, 330, game.config.numOfHumans);
-            game.player = Game.Player.create(game, 30, 400);
+            game.player = Game.Player.create(game, 30, 420);
+            Game.Cloud.create(game, 58, game.config.numOfClouds);
 
             game.scoreText = game.add.text(200, 10, game.getScoreText(game.score), {
                 font: 'bold 14pt Arial'
