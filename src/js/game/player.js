@@ -96,7 +96,11 @@
             // Allow player to jump if they are touching the ground.
             if (cursors.up.isDown && player.body.touching.down)
             {
-                player.body.velocity.y = -250;
+                if (player.y < 350) {
+                    player.body.velocity.y = -150;
+                } else {
+                    player.body.velocity.y = -250;
+                }
             }
         },
         inShadow: function(game, player) {

@@ -18,7 +18,7 @@
             numOfClouds: 3,
             numOfHumans: 5,
 
-            spdCloudPerScore: 5,
+            spdCloudPerScore: 3,
 
             scorePerHuman: 1,
 
@@ -92,8 +92,8 @@
             // where the character can jump on
             platforms = game.platforms = game.add.group(),
             ledges = [
-                [-150, 348], [90, 348], [330, 348], [570, 348],
-                [50, 410], [400, 410]
+                [-130, 349], [110, 349], [350, 349], [590, 349],
+                [50, 420], [400, 420]
             ];
 
             var ledge;
