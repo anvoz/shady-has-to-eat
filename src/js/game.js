@@ -9,7 +9,10 @@
         game.humans = false;
 
         game.player = false;
-        game.playerHPText = '';
+        game.playerHPText = false;
+
+        game.score = 0;
+        game.scoreText = false;
     }
 
     Game.prototype = {
@@ -41,6 +44,10 @@
             Game.Cloud.create(game, 60, 3);
             Game.Human.create(game, 330, 20);
             game.player = Game.Player.create(game, 30, 400);
+
+            game.scoreText = game.add.text(200, 10, game.getScoreText(game.score), {
+                font: 'bold 14pt Arial'
+            });
         },
 
         update: function() {
@@ -53,8 +60,12 @@
             game.physics.arcade.collide(player, humans, function(player, human) {
                 Game.Player.hp++;
                 human.x = -1000;
+                human.y = 330;
                 human.body.velocity.x = 0;
                 human.body.velocity.y = 0;
+
+                game.score++;
+                game.scoreText.setText(game.getScoreText(game.score));
             });
 
             Game.Player.update(game, player);
@@ -82,6 +93,10 @@
             game.physics.arcade.enableBody(ground);
             ground.body.allowGravity = false;
             ground.body.immovable = true;
+        },
+
+        getScoreText: function(score) {
+            return 'Score: ' + score;
         }
     };
 
