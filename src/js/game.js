@@ -4,6 +4,7 @@
     function Game() {
         var game = this;
 
+        game.clouds = false;
         game.platforms = false;
         game.player = false;
     }
@@ -14,6 +15,7 @@
             var game = this;
 
             game.load.image('background', 'assets/background.png');
+            game.load.image('cloud', 'assets/cloudws.png');
 
             game.load.image('ground', 'assets/ground.png');
             game.load.image('ledge', 'assets/ledge.png');
@@ -33,6 +35,7 @@
 
             game.createPlatforms();
             game.player = Game.Player.create(game, 30, 400);
+            Game.Cloud.create(game, 60, 3);
         },
 
         update: function() {

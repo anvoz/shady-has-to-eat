@@ -2,6 +2,7 @@
     'use strict';
 
     var Player = {
+        spd: 150,
         create: function(game, x, y) {
             var player = game.add.sprite(x, y, 'player');
 
@@ -27,7 +28,7 @@
             if (cursors.left.isDown)
             {
                 // Move to the left
-                player.body.velocity.x = -150;
+                player.body.velocity.x = -Player.spd;
                 player.animations.play('left');
 
                 // Stop the left animation while jumping
@@ -38,7 +39,7 @@
             else if (cursors.right.isDown)
             {
                 // Move to the right
-                player.body.velocity.x = 150;
+                player.body.velocity.x = Player.spd;
                 player.animations.play('right');
 
                 // Stop the right animation while jumping
