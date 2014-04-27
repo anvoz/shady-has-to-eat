@@ -18,7 +18,7 @@
             numOfClouds: 3,
             numOfHumans: 5,
 
-            scorePerHuman: 10,
+            scorePerHuman: 1,
 
             hpPerSecond: -1,
             hpPerSunburn: -20,
@@ -70,13 +70,10 @@
             game.physics.arcade.collide(player, platforms);
             game.physics.arcade.collide(player, humans, function(player, human) {
                 Game.Player.hp += game.config.hpPerHuman;
-                human.x = -1000;
-                human.y = 330;
-                human.body.velocity.x = 0;
-                human.body.velocity.y = 0;
-
                 game.score += game.config.scorePerHuman;
                 game.scoreText.setText(game.getScoreText(game.score));
+
+                Game.Human.die(game, human);
             });
 
             Game.Player.update(game, player);

@@ -32,11 +32,15 @@
                 for (var i = 0; i < humans.length; i++) {
                     if (humans[i].x < 0) {
                         humans[i].x = Human.random(0, 625);
-                        humans[i].body.velocity.x = 0;
-                        humans[i].body.velocity.y = 0;
                     }
                 }
             });
+        },
+        die: function(game, human) {
+            human.x = -1000;
+            human.y = 330;
+            human.body.velocity.x = 0;
+            human.body.velocity.y = 0;
         },
         random: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
